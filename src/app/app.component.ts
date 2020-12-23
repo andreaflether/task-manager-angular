@@ -7,16 +7,5 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  title = 'Task Manager';
-  task: Task = new Task(1, 'Root is alive')
-}
-
-export class Task {
-  id: number
-  title: string
-
-  constructor(id: number, title: string) {
-    this.id = id
-    this.title = title
-  }
+  title = 'Task Manager'
 }
