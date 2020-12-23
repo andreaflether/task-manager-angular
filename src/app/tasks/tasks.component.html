@@ -1,0 +1,19 @@
+<table class="table mt-4">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Título</th>
+      <th scope="col">Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let task of tasks">
+      <th scope="row">{{task.id}}</th>
+      <td>{{task.title}}</td>
+      <td>
+        <button type="button" class="btn btn-info">Detalhes</button>
+        <button type="button" class="btn btn-danger">Excluir</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
