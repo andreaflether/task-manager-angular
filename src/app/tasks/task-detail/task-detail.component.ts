@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
 
 import 'rxjs/add/operator/switchMap';
 
@@ -16,7 +17,8 @@ export class TaskDetailComponent implements OnInit {
 
   constructor(
     private taskService: TaskService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location
   ) { 
   }
 
@@ -24,5 +26,9 @@ export class TaskDetailComponent implements OnInit {
     this.route.params
     .switchMap((params: Params) => this.taskService.getTask(+params['id']))
     .subscribe(task => this.task = task)
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
