@@ -28,7 +28,7 @@ export class TaskService {
   getImportantTasks(): Promise<Task[]> {
     return Promise.resolve(TASKS.slice(0, 3))
   }
-
+  
   getTask(id: number): Promise<Task> {
     return this.getTasks()
       .then(tasks => tasks.find(task => task.id === id))
