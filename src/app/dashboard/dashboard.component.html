@@ -5,12 +5,16 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Description</th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let task of tasks">
       <th scope="row">{{ task.id }}</th>
       <td>{{ task.title }}</td>
+      <td>
+        <a [routerLink]="['/tasks', task.id]" class="btn btn-sm btn-info">Details</a>
+      </td>
     </tr>
   </tbody>
 </table>
