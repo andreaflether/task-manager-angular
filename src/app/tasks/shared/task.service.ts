@@ -14,6 +14,8 @@ const TASKS: Task[] = [
 @Injectable()
 
 export class TaskService {
+  constructor(private http: Http) { } 
+
   getTasks(): Promise<Task[]> {
     let promise = new Promise((resolve, reject) => {
       if(TASKS.length > 0) {
