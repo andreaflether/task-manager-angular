@@ -34,4 +34,16 @@ export class TaskDetailComponent implements OnInit {
   goBack() {
     this.location.back();
   }
+
+  updateTask() {
+    if(!this.task.title) {
+      alert("Task title can't be blank.")
+    } else {
+      this.taskService.updateTask(this.task)
+        .subscribe(
+          () => alert('Task updated successfully.'),
+          () => alert('There may be a problem with the server. Please try again later.')
+        )
+    }
+  }
 }

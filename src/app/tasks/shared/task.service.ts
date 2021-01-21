@@ -1,4 +1,4 @@
-import { Http, Response } from '@angular/http';
+import { Headers, Http, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
@@ -35,6 +35,17 @@ export class TaskService {
       .map((response: Response) => response.json().data as Task)  
   }
 
+  updateTask(task: Task): Observable<Task> {
+    let url = `${this.tasksUrl}/${task.id}`;
+    let body = JSON.stringify(task)
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.put(url, body, { headers: headers })
+      .catch(this.handleErrors)
+      .map(() => task)
+  }
 
   private handleErrors(error: Response) {
     console.log("Saving error in log file - Error details => ", error)
