@@ -33,8 +33,8 @@ import { InMemoryTaskDataService } from './in-memory-task-data-service'
     AppRoutingModule,
     BrowserModule,
     FormsModule,
-    InMemoryWebApiModule.forRoot(InMemoryTaskDataService),
     HttpModule,
+    InMemoryWebApiModule.forRoot(InMemoryTaskDataService),
   ],
   providers: [ TaskService ],
   bootstrap: [AppComponent]
