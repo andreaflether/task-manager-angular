@@ -1,5 +1,16 @@
 <h2 class="py-2 mt-2 border-bottom">Tasks</h2>
 
+<div class="card shadow-sm mt-4">
+  <div class="card-body">
+    <div class="input-group">
+      <input type="text" class="form-control" [(ngModel)]="newTask.title" placeholder="Task description" aria-label="Example text with button addon" aria-describedby="button-addon1">
+      <div class="input-group-append">
+        <button class="btn btn-success" type="button" (click)="createTask()">Add task</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <table class="table table-hover mt-4">
   <thead class="thead-light">
     <tr>
