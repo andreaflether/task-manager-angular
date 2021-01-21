@@ -25,7 +25,10 @@ export class TaskDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params
     .switchMap((params: Params) => this.taskService.getTask(+params['id']))
-    .subscribe(task => this.task = task)
+    .subscribe(
+      task => this.task = task,
+      error => alert('There may be a problem with the server. Please try again later.')
+    )
   }
 
   goBack() {
