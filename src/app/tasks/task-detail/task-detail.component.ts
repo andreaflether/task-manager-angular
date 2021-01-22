@@ -24,7 +24,7 @@ export class TaskDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.params
-    .switchMap((params: Params) => this.taskService.getTask(+params['id']))
+    .switchMap((params: Params) => this.taskService.getById(+params['id']))
     .subscribe(
       task => this.task = task,
       error => alert('There may be a problem with the server. Please try again later.')
@@ -39,7 +39,7 @@ export class TaskDetailComponent implements OnInit {
     if(!this.task.title) {
       alert("Task title can't be blank.")
     } else {
-      this.taskService.updateTask(this.task)
+      this.taskService.update(this.task)
         .subscribe(
           () => alert('Task updated successfully.'),
           () => alert('There may be a problem with the server. Please try again later.')

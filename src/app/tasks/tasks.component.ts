@@ -17,7 +17,7 @@ export class TasksComponent implements OnInit {
   }
 
   ngOnInit() { 
-    this.taskService.getTasks()
+    this.taskService.getAll()
       .subscribe(
         tasks => this.tasks = tasks,
         error => alert('There may be a problem with the server. Please try again later.')
@@ -30,7 +30,7 @@ export class TasksComponent implements OnInit {
     if(!this.newTask.title) {
       alert("Task title can't be blank.");
     } else {
-      this.taskService.createTask(this.newTask)
+      this.taskService.create(this.newTask)
         .subscribe(
           (task) => {
             this.tasks.push(task);
@@ -43,7 +43,7 @@ export class TasksComponent implements OnInit {
 
   deleteTask(task: Task) {
     if(confirm(`Are you sure? Task "${task.title}" will be permantly deleted.`)) {
-      this.taskService.deleteTask(task.id)
+      this.taskService.delete(task.id)
         .subscribe(
           () => this.tasks = this.tasks.filter(t => t !== task),
           () => alert('There may be a problem with the server. Please try again later.')
