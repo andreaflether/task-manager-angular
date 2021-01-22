@@ -40,4 +40,16 @@ export class TasksComponent implements OnInit {
         )
     }
   }
+
+  deleteTask(task: Task) {
+    if(confirm(`Are you sure? Task "${task.title}" will be permantly deleted.`)) {
+      this.taskService.deleteTask(task.id)
+        .subscribe(
+          () => this.tasks = this.tasks.filter(t => t !== task),
+          () => alert('There may be a problem with the server. Please try again later.')
+        )
+    } else {
+
+    }
+  }
 }

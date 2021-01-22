@@ -59,6 +59,17 @@ export class TaskService {
       .map(() => task)
   }
 
+  deleteTask(id: Number): Observable<null> {
+    let url = `${this.tasksUrl}/${id}`;
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.delete(url, { headers: headers })
+      .catch(this.handleErrors)
+      .map(() => null)
+  }
+
   private handleErrors(error: Response) {
     console.log("Saving error in log file - Error details => ", error)
     return Observable.throw(error);
