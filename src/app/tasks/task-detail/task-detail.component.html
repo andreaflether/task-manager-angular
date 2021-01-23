@@ -1,12 +1,37 @@
 <h2 class="py-2 mt-2 mb-3 border-bottom">Task details: <b>{{ task?.title }}</b></h2>
 
-<form *ngIf="task">
-  <div class="form-group" >
-    <label for="title">Title</label>
-    <input [(ngModel)]="task.title" name="title" type="text" class="form-control" id="title" aria-describedby="title">
+<form #taskForm="ngForm" *ngIf="task">
+  <div class="row">
+    <div class="form-group col-lg-6">
+      <label for="title">Title</label>
+      <input [(ngModel)]="task.title" name="title" type="text" class="form-control" id="title" aria-describedby="title">
+    </div>
+    <div class="form-group col-lg-3">
+      <label for="deadline">Deadline</label>
+      <input [(ngModel)]="task.deadline" name="deadline" type="text" class="form-control" id="deadline" aria-describedby="deadline">
+    </div>
+    <div class="form-group col-lg-3">
+      <label for="deadline">Status</label>
+      <select 
+        [(ngModel)]="task.done" 
+        name="done" 
+        type="text" 
+        class="form-control" 
+        id="done" 
+        aria-describedby="done">
+        <option *ngFor="let option of taskDoneOptions" [value]="option.value">{{ option.text }}</option>
+      </select>
+    </div>
+    <div class="form-group col-lg-12">
+      <label for="title">Description</label>
+      <textarea [(ngModel)]="task.description" name="description" class="form-control" id="description" aria-describedby="description"></textarea>
+    </div>
   </div>
-  <div class="actions justify-content-between">
+  <div class="actions d-flex justify-content-between">
     <button class="btn btn-light" (click)="goBack()">Voltar</button>
     <button type="submit" class="btn btn-primary" (click)="updateTask()">Save</button>
   </div>
+  <hr />
+  <pre>{{ task | json }}</pre>
 </form>
+

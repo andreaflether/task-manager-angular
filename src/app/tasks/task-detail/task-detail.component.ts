@@ -12,7 +12,11 @@ import { TaskService } from '../shared/task.service';
 
 export class TaskDetailComponent implements OnInit {
   public task: Task;
-
+  public taskDoneOptions: Array<any> = [
+    { value: false, text: 'Pending' },
+    { value: true, text: 'Done' }
+  ]
+  
   constructor(
     private taskService: TaskService,
     private route: ActivatedRoute,
