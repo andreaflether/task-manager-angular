@@ -3,24 +3,52 @@
 <form #taskForm="ngForm" *ngIf="task">
   <div class="row">
     <div class="form-group col-lg-6">
-      <label for="title">Title</label>
-      <input [(ngModel)]="task.title" name="title" type="text" class="form-control" id="title" aria-describedby="title">
+      <label for="title">Title <span class="required">*</span></label>
+      <input 
+        #title="ngModel" 
+        [(ngModel)]="task.title" 
+        [class.is-invalid]="title.invalid && title.touched"
+        [class.is-valid]="title.valid"
+        name="title" 
+        type="text" 
+        class="form-control" 
+        id="title" 
+        aria-describedby="title"
+        required>
+        <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback">Please provide a valid title.</div>
     </div>
     <div class="form-group col-lg-3">
-      <label for="deadline">Deadline</label>
-      <input [(ngModel)]="task.deadline" name="deadline" type="text" class="form-control" id="deadline" aria-describedby="deadline">
+      <label for="deadline">Deadline <span class="required">*</span></label>
+      <input 
+        [(ngModel)]="task.deadline" 
+        #deadline="ngModel"
+        [class.is-invalid]="deadline.invalid && deadline.touched"
+        [class.is-valid]="deadline.valid"
+        name="deadline" 
+        type="text" 
+        class="form-control" 
+        id="deadline" 
+        aria-describedby="deadline"
+        required>
+      <div class="invalid-feedback">Please provide a valid deadline.</div>
     </div>
     <div class="form-group col-lg-3">
-      <label for="deadline">Status</label>
+      <label for="deadline">Status <span class="required">*</span></label>
       <select 
         [(ngModel)]="task.done" 
+        #done="ngModel"
+        [class.is-invalid]="done.invalid && done.touched"
+        [class.is-valid]="done.valid"
         name="done" 
         type="text" 
         class="form-control" 
         id="done" 
-        aria-describedby="done">
+        aria-describedby="done"
+        required>
         <option *ngFor="let option of taskDoneOptions" [value]="option.value">{{ option.text }}</option>
       </select>
+      <div class="invalid-feedback">Please select a valid status.</div>
     </div>
     <div class="form-group col-lg-12">
       <label for="title">Description</label>
@@ -29,9 +57,7 @@
   </div>
   <div class="actions d-flex justify-content-between">
     <button class="btn btn-light" (click)="goBack()">Voltar</button>
-    <button type="submit" class="btn btn-primary" (click)="updateTask()">Save</button>
+    <button [disabled]="taskForm.invalid" type="submit" class="btn btn-primary" (click)="updateTask()">Save</button>
   </div>
-  <hr />
-  <pre>{{ task | json }}</pre>
 </form>
 
