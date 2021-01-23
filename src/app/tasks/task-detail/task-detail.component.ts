@@ -16,7 +16,7 @@ export class TaskDetailComponent implements OnInit {
     { value: false, text: 'Pending' },
     { value: true, text: 'Done' }
   ]
-  
+
   constructor(
     private taskService: TaskService,
     private route: ActivatedRoute,
@@ -47,5 +47,9 @@ export class TaskDetailComponent implements OnInit {
           () => alert('There may be a problem with the server. Please try again later.')
         )
     }
+  }
+
+  showFieldError(field): boolean {
+    return field.invalid && (field.touched || field.dirty);
   }
 }

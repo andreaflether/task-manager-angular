@@ -3,27 +3,34 @@
 <form #taskForm="ngForm" *ngIf="task">
   <div class="row">
     <div class="form-group col-lg-6">
-      <label for="title">Title <span class="required">*</span></label>
+      <label for="title">Title <span class="required" title="Required">*</span></label>
       <input 
         #title="ngModel" 
         [(ngModel)]="task.title" 
-        [class.is-invalid]="title.invalid && title.touched"
+        [class.is-invalid]="showFieldError(title)"
         [class.is-valid]="title.valid"
         name="title" 
         type="text" 
         class="form-control" 
         id="title" 
         aria-describedby="title"
-        required>
+        required
+        autocomplete="off"
+        maxlength="50"
+        minlength="3">
         <div class="valid-feedback">Looks good!</div>
-        <div class="invalid-feedback">Please provide a valid title.</div>
+        <div class="invalid-feedback" *ngIf="showFieldError(title)">
+          <span *ngIf="title.errors.required">Title can't be blank.</span>
+          <span *ngIf="title.errors.minlength">Title must have at least 3 characters.</span>
+          <span *ngIf="title.errors.maxlength">Title is too big. Maximum is 50 characters.</span>
+        </div>
     </div>
     <div class="form-group col-lg-3">
-      <label for="deadline">Deadline <span class="required">*</span></label>
+      <label for="deadline">Deadline <span class="required" title="Required">*</span></label>
       <input 
         [(ngModel)]="task.deadline" 
         #deadline="ngModel"
-        [class.is-invalid]="deadline.invalid && deadline.touched"
+        [class.is-invalid]="showFieldError(deadline)"
         [class.is-valid]="deadline.valid"
         name="deadline" 
         type="text" 
@@ -31,14 +38,14 @@
         id="deadline" 
         aria-describedby="deadline"
         required>
-      <div class="invalid-feedback">Please provide a valid deadline.</div>
+      <div class="invalid-feedback">Deadline can't be blank.</div>
     </div>
     <div class="form-group col-lg-3">
-      <label for="deadline">Status <span class="required">*</span></label>
+      <label for="deadline">Status <span class="required" title="Required">*</span></label>
       <select 
         [(ngModel)]="task.done" 
         #done="ngModel"
-        [class.is-invalid]="done.invalid && done.touched"
+        [class.is-invalid]="showFieldError(done)"
         [class.is-valid]="done.valid"
         name="done" 
         type="text" 
@@ -48,7 +55,7 @@
         required>
         <option *ngFor="let option of taskDoneOptions" [value]="option.value">{{ option.text }}</option>
       </select>
-      <div class="invalid-feedback">Please select a valid status.</div>
+      <div class="invalid-feedback">Please select a status.</div>
     </div>
     <div class="form-group col-lg-12">
       <label for="title">Description</label>
@@ -60,4 +67,3 @@
     <button [disabled]="taskForm.invalid" type="submit" class="btn btn-primary" (click)="updateTask()">Save</button>
   </div>
 </form>
-
