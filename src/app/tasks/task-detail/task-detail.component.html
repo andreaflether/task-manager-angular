@@ -16,13 +16,13 @@
         aria-describedby="title"
         required
         autocomplete="off"
-        maxlength="50"
-        minlength="3">
+        maxlength="255"
+        minlength="2">
         <div class="valid-feedback">Looks good!</div>
         <div class="invalid-feedback" *ngIf="showFieldError(title)">
           <span *ngIf="title.errors.required">Title can't be blank.</span>
-          <span *ngIf="title.errors.minlength">Title must have at least 3 characters.</span>
-          <span *ngIf="title.errors.maxlength">Title is too big. Maximum is 50 characters.</span>
+          <span *ngIf="title.errors.minlength">Title must have at least {{ title.errors.minlength.requiredLength }} characters.</span>
+          <span *ngIf="title.errors.maxlength">Title is too big. Maximum is 255 characters.</span>
         </div>
     </div>
     <div class="form-group col-lg-3">
@@ -66,4 +66,7 @@
     <button class="btn btn-light" (click)="goBack()">Voltar</button>
     <button [disabled]="taskForm.invalid" type="submit" class="btn btn-primary" (click)="updateTask()">Save</button>
   </div>
+  <pre>
+    {{ title.errors | json }}
+  </pre>
 </form>
