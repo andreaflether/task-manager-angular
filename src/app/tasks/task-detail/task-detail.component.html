@@ -66,7 +66,4 @@
     <button class="btn btn-light" (click)="goBack()">Voltar</button>
     <button [disabled]="taskForm.invalid" type="submit" class="btn btn-primary" (click)="updateTask()">Save</button>
   </div>
-  <pre>
-    {{ title.errors | json }}
-  </pre>
 </form>
