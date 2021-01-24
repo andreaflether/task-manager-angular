@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
+import { FormGroup, FormControl } from '@angular/forms';
 
 import { Task } from '../shared/task.model';
 import { TaskService } from '../shared/task.service';
@@ -11,6 +12,7 @@ import { TaskService } from '../shared/task.service';
 })
 
 export class TaskDetailComponent implements OnInit, AfterViewInit {
+  public reactiveTaskForm: FormGroup;
   public task: Task;
   public taskDoneOptions: Array<any> = [
     { value: false, text: 'Pending' },
@@ -21,12 +23,21 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     private taskService: TaskService,
     private route: ActivatedRoute,
     private location: Location
-  ) {  }
+  ) { 
+    this.reactiveTaskForm = new FormGroup({
+      title: new FormControl(null),
+      deadline: new FormControl(null),
+      done: new FormControl(null),
+      description: new FormControl(null),
+    })
+  }
 
   ngAfterViewInit() {
     $('#deadline').daterangepicker({
       singleDatePicker: true,
       timePicker: true,
+      autoApply: true,
+      autoUpdateInput: true,
       locale: {
         format: 'MMMM D, YYYY hh:mm'
       }
