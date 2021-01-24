@@ -1,15 +1,9 @@
-export class Task {
-  id: number;
-  title: string;
-  description?: string;
-  done?: boolean;
-  deadline?: string;
-
+export class Task{
   constructor(
-    id: number,
-    title: string,
-    description?: string,
-    done?: boolean,
-    deadline?: string
+    public id: number,
+    public title: string,
+    public description?: string,
+    public done?: boolean,
+    public deadline?: string
   ) { }
 }

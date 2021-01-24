@@ -27,6 +27,9 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     $('#deadline').daterangepicker({
       singleDatePicker: true,
       timePicker: true,
+      locale: {
+        format: 'MMMM D, YYYY hh:mm'
+      }
     }).on('apply.daterangepicker', () => this.task.deadline = $('#deadline').val());
   }
 
@@ -46,15 +49,11 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
   }
 
   updateTask() {
-    if(!this.task.title) {
-      alert("Task title can't be blank.")
-    } else {
-      this.taskService.update(this.task)
-        .subscribe(
-          () => alert('Task updated successfully.'),
-          () => alert('There may be a problem with the server. Please try again later.')
-        )
-    }
+    this.taskService.update(this.task)
+      .subscribe(
+        () => alert('Task updated successfully.'),
+        () => alert('There may be a problem with the server. Please try again later.')
+      )
   }
 
   showFieldError(field): boolean {

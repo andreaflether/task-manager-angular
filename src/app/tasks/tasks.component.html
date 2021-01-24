@@ -2,12 +2,25 @@
 
 <div class="card shadow-sm mt-4">
   <div class="card-body">
-    <div class="input-group">
-      <input type="text" class="form-control" [(ngModel)]="newTask.title" placeholder="Task description" aria-label="Example text with button addon" aria-describedby="button-addon1">
-      <div class="input-group-append">
-        <button class="btn btn-success" type="button" (click)="createTask()">Add task</button>
+    <form (ngSubmit)="createTask()">
+      <div class="input-group">
+        <input 
+          type="text" 
+          name="title"
+          class="form-control" 
+          [(ngModel)]="newTask.title" 
+          placeholder="Task description" 
+          aria-describedby="button-add">
+        <div class="input-group-append">
+          <button 
+            class="btn btn-success" 
+            id="button-add" 
+            type="submit">
+            Add task
+          </button>
+        </div>
       </div>
-    </div>
+    </form>
   </div>
 </div>
 
