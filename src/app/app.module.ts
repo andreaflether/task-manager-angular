@@ -35,6 +35,7 @@ import 'rxjs/add/observable/throw';
 
 // JQuery plugins
 import * as $ from 'jquery';
+import * as daterangepicker from 'daterangepicker';
 
 @NgModule({
   declarations: [

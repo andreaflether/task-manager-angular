@@ -23,9 +23,16 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     private location: Location
   ) {  }
 
-  ngAfterViewInit() { }
+  ngAfterViewInit() {
+    $('#deadline').daterangepicker({
+      singleDatePicker: true,
+      timePicker: true,
+    }).on('apply.daterangepicker', () => this.task.deadline = $('#deadline').val());
+  }
 
   ngOnInit() {
+    this.task = new Task(null, null);
+
     this.route.params
     .switchMap((params: Params) => this.taskService.getById(+params['id']))
     .subscribe(
