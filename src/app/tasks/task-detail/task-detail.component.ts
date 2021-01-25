@@ -41,7 +41,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
       locale: {
         format: 'MMMM D, YYYY hh:mm'
       }
-    }).on('apply.daterangepicker', () => this.task.deadline = $('#deadline').val());
+    }).on('apply.daterangepicker', () => this.reactiveTaskForm.get('deadline').setValue($('#deadline').val()));
   }
 
   ngOnInit() {
@@ -50,9 +50,21 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     this.route.params
     .switchMap((params: Params) => this.taskService.getById(+params['id']))
     .subscribe(
-      task => this.task = task,
+      task => this.setTask(task),
       error => alert('There may be a problem with the server. Please try again later.')
     )
+  }
+
+  setTask(task: Task): void {
+    this.task = task;
+    
+    let formModel = {
+      title: task.title || null,
+      deadline: task.deadline || null,
+      done: task.done || false,
+      description: task.description || null,
+    };
+    this.reactiveTaskForm.patchValue(formModel);
   }
 
   goBack() {
