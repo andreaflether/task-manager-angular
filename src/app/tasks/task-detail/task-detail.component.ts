@@ -14,18 +14,19 @@ import { TaskService } from '../shared/task.service';
 export class TaskDetailComponent implements OnInit, AfterViewInit {
   public reactiveTaskForm: FormGroup;
   public task: Task;
-  public taskDoneOptions: Array<any> = [
-    { value: false, text: 'Pending' },
-    { value: true, text: 'Done' }
-  ]
+  public taskDoneOptions: Array<any>;
 
   constructor(
     private taskService: TaskService,
     private route: ActivatedRoute,
     private location: Location,
     private formBuilder: FormBuilder
-
   ) { 
+    this.taskDoneOptions = [
+      { value: false, text: 'Pending' },
+      { value: true, text: 'Done' }
+    ];
+
     this.reactiveTaskForm = this.formBuilder.group({
       title: [null, [ Validators.required, Validators.minLength(2), Validators.maxLength(255) ]],
       deadline: [null, Validators.required],
@@ -59,14 +60,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
   setTask(task: Task): void {
     this.task = task;
-    
-    let formModel = {
-      title: task.title || null,
-      deadline: task.deadline || null,
-      done: task.done || false,
-      description: task.description || null,
-    };
-    this.reactiveTaskForm.patchValue(formModel);
+    this.reactiveTaskForm.patchValue(task);
   }
 
   goBack() {
@@ -78,7 +72,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     this.task.deadline = this.reactiveTaskForm.get('deadline').value;
     this.task.done = this.reactiveTaskForm.get('done').value;
     this.task.description = this.reactiveTaskForm.get('description').value;
-    
+
     this.taskService.update(this.task)
       .subscribe(
         () => alert('Task updated successfully.'),
@@ -86,7 +80,20 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
       )
   }
 
-  showFieldError(field): boolean {
+  // Methods: Form errors
+  fieldClassForErrorOrSuccess(fieldName: string) {
+    return {
+      'is-invalid': this.showFieldError(fieldName),
+      'is-valid': this.getField(fieldName).valid
+    }
+  }
+
+  showFieldError(fieldName: string): boolean {
+    let field = this.getField(fieldName);
     return field.invalid && (field.touched || field.dirty);
+  }
+
+  getField(fieldName: string) {
+    return this.reactiveTaskForm.get(fieldName)
   }
 }
