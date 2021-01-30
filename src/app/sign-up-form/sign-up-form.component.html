@@ -59,6 +59,7 @@
                     id="passwordConfirmation">
                   <div class="invalid-feedback" *ngIf="formUtils.showFieldError('passwordConfirmation')">
                     <span *ngIf="form.get('passwordConfirmation').errors.required">Password confirmation can't be blank.</span>
+                    <span *ngIf="form.get('passwordConfirmation').errors.mismatch">Password confirmation does not match Password.</span>
                   </div>
                 </div>
               </div>
