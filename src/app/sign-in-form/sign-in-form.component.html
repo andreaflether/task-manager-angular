@@ -1,0 +1,42 @@
+<div class="container">
+  <h2 class="text-center mt-4">Sign in</h2>
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-10 col-sm-12">
+      <div class="card shadow-sm p-3 mt-2">
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="signInUser()">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input 
+                formControlName="email" 
+                [ngClass]="formUtils.fieldClassForErrorOrSuccess('email')"
+                type="email" 
+                class="form-control" 
+                id="email">
+              <div class="invalid-feedback" *ngIf="formUtils.showFieldError('email')">
+                <span *ngIf="form.get('email').errors.required">Email can't be blank.</span>
+                <span *ngIf="form.get('email').errors.email">Please provide a valid email.</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input 
+                formControlName="password" 
+                [ngClass]="formUtils.fieldClassForErrorOrSuccess('password')"
+                type="password" 
+                class="form-control" 
+                id="password">
+              <div class="invalid-feedback" *ngIf="formUtils.showFieldError('password')">
+                <span *ngIf="form.get('password').errors.required">Password can't be blank.</span>
+              </div>
+            </div>
+            
+            <div class="actions text-center">
+              <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Sign in</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>  
+  </div>  
+</div>
