@@ -19,6 +19,7 @@ import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 
 // Services
 import { TaskService } from './tasks/shared/task.service';
+import { AuthService } from './shared/auth.service';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
@@ -63,6 +64,7 @@ import * as daterangepicker from 'daterangepicker';
   ],
   providers: [ 
     Angular2TokenService,
+    AuthService,
     TaskService
   ],
   bootstrap: [ AppComponent ]
