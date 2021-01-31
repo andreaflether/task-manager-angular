@@ -23,6 +23,7 @@ import { AuthService } from './shared/auth.service';
 
 // Guards
 import { AuthGuard } from './guards/auth.guard';
+import { NotAuthenticatedGuard } from './guards/not-authenticated.guard';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
@@ -66,6 +67,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     Angular2TokenService,
     AuthGuard,
     AuthService,
+    NotAuthenticatedGuard,
     TaskService
   ],
   bootstrap: [ AppComponent ]
