@@ -21,6 +21,9 @@ import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { TaskService } from './tasks/shared/task.service';
 import { AuthService } from './shared/auth.service';
 
+// Guards
+import { AuthGuard } from './guards/auth.guard';
+
 // Modules
 import { AppRoutingModule } from './app-routing.module';
 
@@ -51,14 +54,15 @@ import * as daterangepicker from 'daterangepicker';
     TaskDetailComponent,
   ],
   imports: [
-    AppRoutingModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule
   ],
   providers: [ 
     Angular2TokenService,
+    AuthGuard,
     AuthService,
     TaskService
   ],
