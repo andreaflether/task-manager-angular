@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
+import { AuthService } from '../shared/auth.service';
 import { FormUtils } from '../shared/form.utils';
+import { User } from '../shared/user.model';
 
 @Component({
   selector: 'sign-up-form',
@@ -12,27 +15,39 @@ export class SignUpFormComponent {
   public form: FormGroup;
   public formUtils: FormUtils;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private authService: AuthService,
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {
+    this.setupForm();
+    this.formUtils = new FormUtils(this.form);
+  }
+
+  signUpUser() {
+    this.authService.signUp(this.form.value as User)
+      .subscribe(
+        () => {
+          alert('Yay! Your account was successfully created.');
+          this.router.navigate(['/dashboard']);
+        }
+      )
+  }
+
+  passwordConfirmationValidator(form: FormGroup) {
+    if(form.get('password').dirty && form.get('password').value === form.get('passwordConfirmation').value) {
+      form.get('passwordConfirmation').setErrors(null);
+    } else {
+      form.get('passwordConfirmation').setErrors({'mismatch': true});
+    }
+  }
+
+  private setupForm() {
     this.form = this.formBuilder.group({
       name: [ null, [ Validators.required, Validators.minLength(5), Validators.maxLength(100) ] ],
       email: [ null, [ Validators.required, Validators.email ] ],
       password: [ null, [ Validators.required, Validators.minLength(8) ] ],
       passwordConfirmation: [ null, [ Validators.required ] ]
     }, { validator: this.passwordConfirmationValidator })
-
-    this.formUtils = new FormUtils(this.form);
-  }
-
-  signUpUser() {
-    console.log('SignUp form was sent');
-    console.log(this.form.value);
-  }
-
-  passwordConfirmationValidator(form: FormGroup) {
-    if(form.get('password').dirty && form.get('password').value === form.get('passwordConfirmation').value) {
-      form.get('passwordConfirmation').setErrors(null)
-    } else {
-      form.get('passwordConfirmation').setErrors({'mismatch': true})
-    }
   }
 }

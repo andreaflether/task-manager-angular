@@ -11,9 +11,9 @@ import { User } from './user.model';
 export class AuthService {
   constructor(private tokenService: Angular2TokenService) { }
 
-  signUp(user: User) {
-    // call Angular2-Token signUp method here
-    // returns a Observable<Response>
+  signUp(user: User): Observable<Response>{
+    return this.tokenService.registerAccount(user as any)
+      .catch(this.handleErrors);
   }
   
   SignIn(uid: string, password: string) {
