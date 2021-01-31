@@ -24,10 +24,6 @@ import { AuthService } from './shared/auth.service';
 // Modules
 import { AppRoutingModule } from './app-routing.module';
 
-// In memory web api
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryTaskDataService } from './in-memory-task-data-service'
-
 // RXJS operators
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
@@ -59,8 +55,7 @@ import * as daterangepicker from 'daterangepicker';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryTaskDataService),
+    HttpModule
   ],
   providers: [ 
     Angular2TokenService,
