@@ -41,6 +41,7 @@ import 'rxjs/add/observable/throw';
 // JQuery plugins
 import * as $ from 'jquery';
 import * as daterangepicker from 'daterangepicker';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import * as daterangepicker from 'daterangepicker';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFontAwesomeModule
   ],
   providers: [ 
     Angular2TokenService,

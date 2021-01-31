@@ -26,7 +26,7 @@ export class AuthService {
     // returns a Observable<Response>
   }
   
-  userSignedIn() {
+  userSignedIn(): boolean{
     return this.tokenService.userSignedIn();
   }
 
