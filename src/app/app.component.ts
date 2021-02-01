@@ -13,7 +13,7 @@ export class AppComponent {
 
   constructor(private tokenService: TokenService) {
     this.tokenService.init({
-      apiBase: 'http://api.task-manager.test:3000',
+      apiBase: 'https://task-manager-api-andreflether.herokuapp.com',
       globalOptions: {
         headers: {
           'Content-Type': 'application/json',
