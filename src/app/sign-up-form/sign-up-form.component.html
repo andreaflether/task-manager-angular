@@ -6,7 +6,7 @@
         <div class="card-body">
           <div *ngIf="formErrors" class="alert alert-danger" role="alert">
             <fa name="exclamation-triangle"></fa> <strong>Error trying to create your account. Details below.</strong>
-            <ul class="mt-2">
+            <ul class="mt-2 mb-0">
               <li *ngFor="let error of formErrors">{{ error }}</li>
             </ul>
           </div>

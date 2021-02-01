@@ -5,20 +5,25 @@
   </button>
 
   <div class="collapse navbar-collapse">
-    <ul *ngIf="authService.userSignedIn()" class="navbar-nav mr-auto">
-      <li routerLinkActive="active" class="nav-item">
-        <a class="nav-link" routerLink="/dashboard">Dashboard</a>
-      </li>
-      <li routerLinkActive="active" class="nav-item">
-        <a class="nav-link" routerLink="/tasks">Tasks</a>
-      </li>
-      <task-search></task-search>
-      <li routerLinkActive="active" class="nav-item my-auto ml-auto">
+    <div *ngIf="authService.userSignedIn()" class="logged-in-menu">
+
+      
+      <ul class="navbar-nav mr-auto">
+        <li routerLinkActive="active" class="nav-item">
+          <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+        </li>
+        <li routerLinkActive="active" class="nav-item">
+          <a class="nav-link" routerLink="/tasks">Tasks</a>
+        </li>
+        <task-search></task-search>
+  
+      </ul>
+      
         <button (click)="signOutUser()" class="btn btn-sm btn-outline-danger">
           <fa name="sign-out"></fa>Sign out
         </button>
-      </li>
-    </ul>
+    </div>
+
     <ul *ngIf="!authService.userSignedIn()" class="navbar-nav ml-auto">
       <li routerLinkActive="active" class="nav-item">
         <button class="btn btn-primary mr-2" routerLink="/sign-up">Sign up</button>

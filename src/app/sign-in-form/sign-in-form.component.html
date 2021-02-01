@@ -4,6 +4,12 @@
     <div class="col-lg-6 col-md-10 col-sm-12">
       <div class="card shadow-sm p-3 mt-2">
         <div class="card-body">
+          <div *ngIf="formErrors" class="alert alert-danger" role="alert">
+            <fa name="exclamation-triangle"></fa> <strong>Unable to sign in. Details below.</strong>
+            <ul class="mt-2 mb-0">
+              <li *ngFor="let error of formErrors">{{ error }}</li>
+            </ul>
+          </div>
           <form [formGroup]="form" (ngSubmit)="signInUser()">
             <div class="form-group">
               <label for="email">Email</label>
@@ -32,7 +38,7 @@
             </div>
             
             <div class="actions text-center">
-              <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Sign in</button>
+              <button [disabled]="form.invalid || submitted" type="submit" class="btn btn-primary">Sign in</button>
             </div>
           </form>
         </div>
