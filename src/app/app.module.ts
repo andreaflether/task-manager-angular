@@ -4,9 +4,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-// Angular plugins
-import { Angular2TokenService } from 'angular2-token';
-
 // Components
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -18,8 +15,9 @@ import { TasksComponent } from './tasks/tasks.component';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 
 // Services
-import { TaskService } from './tasks/shared/task.service';
 import { AuthService } from './shared/auth.service';
+import { TaskService } from './tasks/shared/task.service';
+import { TokenService } from './shared/token.service';
 
 // Guards
 import { AuthGuard } from './guards/auth.guard';
@@ -64,11 +62,11 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     AngularFontAwesomeModule
   ],
   providers: [ 
-    Angular2TokenService,
     AuthGuard,
     AuthService,
     NotAuthenticatedGuard,
-    TaskService
+    TaskService,
+    TokenService,
   ],
   bootstrap: [ AppComponent ]
 })

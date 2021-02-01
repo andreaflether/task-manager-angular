@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 
-import { Angular2TokenService } from 'angular2-token';
+import { TokenService } from '../../shared/token.service';
 
 import { Task } from './task.model';
 
@@ -12,7 +12,7 @@ import { Task } from './task.model';
 export class TaskService {
   public tasksUrl = 'tasks';
 
-  constructor(private tokenHttp: Angular2TokenService) { } 
+  constructor(private tokenHttp: TokenService) { } 
 
   getAll(): Observable<Task[]> {
     let url = `${this.tasksUrl}?q[s]=updated_at+DESC`;
