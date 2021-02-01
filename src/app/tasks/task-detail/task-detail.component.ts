@@ -43,8 +43,8 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     $('#deadline').daterangepicker({
       singleDatePicker: true,
       timePicker: true,
-      autoApply: true,
-      autoUpdateInput: false,
+      autoApply: false,
+      autoUpdateInput: true,
       locale: {
         format: 'MMMM D, YYYY hh:mm'
       }
