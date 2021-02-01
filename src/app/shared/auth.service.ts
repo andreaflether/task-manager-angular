@@ -21,9 +21,9 @@ export class AuthService {
     // returns a Observable<Response>
   }
   
-  signOut() {
-    // call Angular2-Token signOut method here
-    // returns a Observable<Response>
+  signOut(): Observable<Response> {
+    return this.tokenService.signOut()
+      .catch(this.handleErrors);
   }
   
   userSignedIn(): boolean{
